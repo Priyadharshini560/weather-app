@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            font-family: Arial;
+            display: flex;
+            justify-content: flex-start; 
+            align-items: center;        
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            color: rgb(16, 11, 11);
+            padding-top: 40px; 
+        }
+
+        .weather-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Weather App</h2>
+
+    <input type="text" id="city" placeholder="Enter city name"><br>
+    <button onclick="temp()">Search</button>
+
+    
+    <img class="weather-img" src="https://img.freepik.com/premium-psd/sunny-rainy-day-weather-forecast-icon-meteorological-sign-3d-render_471402-496.jpg">
+
+    <p id="cityname"></p>
+    <h1 id="temp"></h1>
+
+    <script>
+        function temp()
+        {
+            var name1=document.getElementById("city").value;
+            var key=`48b1efa48140730f1c1816dfe621fe9a`;
+            
+            var url=`https://api.openweathermap.org/data/2.5/weather?q=${name1}&appid=${key}`;
+
+            fetch(url)
+            .then((res)=>res.json())
+            .then(data=>{
+                document.getElementById("cityname").innerHTML=data.name;
+                document.getElementById("temp").innerHTML=data.main.temp;
+            })
+        }
+    </script>
+
+</body>
+</html>
